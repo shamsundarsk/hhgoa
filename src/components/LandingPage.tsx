@@ -8,12 +8,12 @@ interface LandingPageProps {
 
 export const LandingPage: React.FC<LandingPageProps> = ({ onStartIdCard, onStartPfpFrame }) => {
   return (
-    <div className="relative min-h-screen flex flex-col justify-between text-center overflow-hidden">
+    <div className="relative h-[calc(100vh-65px)] max-h-[calc(100vh-65px)] flex flex-col justify-between text-center overflow-hidden p-2 sm:p-4">
       
       {/* ========================================================================= */}
-      {/* SECTION 1: HERO SECTION (ALL DETAILS + GOA BEACH SUNSET BACKGROUND BANNER) */}
+      {/* SECTION 1: HERO SECTION (COMPACT 100% SINGLE VIEWPORT FIT)                 */}
       {/* ========================================================================= */}
-      <section className="relative px-4 py-12 flex flex-col items-center justify-center min-h-[85vh]">
+      <section className="relative flex-1 flex flex-col items-center justify-center px-2 py-2">
         {/* Goa Beach Sunset Background Overlay */}
         <div className="absolute inset-0 z-0">
           <img
@@ -28,87 +28,84 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartIdCard, onStart
         <div className="absolute inset-0 opacity-25 pointer-events-none bg-[radial-gradient(#E5F552_2px,transparent_2px)] [background-size:32px_32px] animate-pulse z-0"></div>
 
         {/* Subtle Ambient Radial Lighting */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#E5F552]/10 blur-[120px] rounded-full pointer-events-none z-0"></div>
-        <div className="absolute bottom-1/3 left-1/2 -translate-x-1/2 w-[500px] h-[250px] bg-[#FF5E97]/10 blur-[100px] rounded-full pointer-events-none z-0"></div>
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[250px] bg-[#E5F552]/10 blur-[100px] rounded-full pointer-events-none z-0"></div>
+        <div className="absolute bottom-1/3 left-1/2 -translate-x-1/2 w-[400px] h-[200px] bg-[#FF5E97]/10 blur-[80px] rounded-full pointer-events-none z-0"></div>
 
         {/* Hero Details Content */}
-        <div className="relative z-10 max-w-5xl space-y-10">
+        <div className="relative z-10 max-w-4xl w-full mx-auto space-y-4">
           {/* Top Event Tagline & 2:47PM Studio Logo Header */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="flex flex-row items-center justify-center gap-3">
             <img
               src="/assets/247_studio_logo.png"
               alt="2:47PM Studio"
-              className="h-10 sm:h-12 w-auto object-contain drop-shadow-[0_0_20px_rgba(229,245,82,0.4)]"
+              className="h-7 sm:h-9 w-auto object-contain drop-shadow-[0_0_15px_rgba(229,245,82,0.4)]"
             />
 
-            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#163824]/90 border border-[#E5F552]/40 text-xs sm:text-sm font-terminal text-[#E5F552] shadow-[0_0_30px_rgba(229,245,82,0.2)] uppercase tracking-widest animate-float backdrop-blur-md">
-              <Palmtree className="w-4 h-4 text-[#E5F552]" />
-              <span>HACKER HOUSE GOA 2026 OFFICIAL STUDIO</span>
-              <Sparkles className="w-4 h-4 fill-current text-[#FF5E97]" />
+            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#163824]/90 border border-[#E5F552]/40 text-[10px] sm:text-xs font-terminal text-[#E5F552] shadow-[0_0_20px_rgba(229,245,82,0.2)] uppercase tracking-widest backdrop-blur-md">
+              <Palmtree className="w-3.5 h-3.5 text-[#E5F552]" />
+              <span>HH GOA 2026 STUDIO</span>
+              <Sparkles className="w-3 h-3 fill-current text-[#FF5E97]" />
             </div>
           </div>
 
           {/* Main Header Typography — Bebas Neue + Official Hot-Pink "गोवा" Logo Image */}
-          <div className="space-y-4 flex flex-col items-center">
-            <h1 className="font-display font-black text-6xl sm:text-9xl tracking-tight text-[#E5F552] leading-[0.88] uppercase drop-shadow-[0_10px_30px_rgba(229,245,82,0.3)] flex items-center justify-center gap-3">
+          <div className="space-y-1.5 flex flex-col items-center">
+            <h1 className="font-display font-black text-5xl sm:text-7xl tracking-tight text-[#E5F552] leading-none uppercase drop-shadow-[0_8px_20px_rgba(229,245,82,0.3)]">
               HACKER HOUSE
             </h1>
 
             {/* Official Hot-Pink "गोवा" Script Image Asset */}
-            <div className="relative my-2 flex items-center justify-center">
+            <div className="relative flex items-center justify-center my-0.5">
               <img
                 src="/assets/media__1786506921751.png"
                 alt="गोवा"
-                className="h-28 sm:h-40 w-auto object-contain drop-shadow-[0_0_40px_rgba(255,94,151,0.95)] animate-pulse"
+                className="h-20 sm:h-28 w-auto object-contain drop-shadow-[0_0_30px_rgba(255,94,151,0.95)] animate-pulse"
               />
             </div>
 
-            <div className="pt-2">
-              <h2 className="font-display font-black text-2xl sm:text-4xl text-[#F3F0E6] uppercase tracking-wider flex items-center justify-center gap-2">
+            <div>
+              <h2 className="font-display font-black text-lg sm:text-2xl text-[#F3F0E6] uppercase tracking-wider">
                 CHOOSE CREATION FORMAT
               </h2>
             </div>
           </div>
 
-          {/* Subtitle Lines — IBM Plex Mono */}
-          <div className="space-y-1 font-terminal text-base sm:text-lg text-stone-300 uppercase tracking-wide">
-            <p>YOUR PHOTO. YOUR STACK. YOUR STORY.</p>
-            <p>BUILT FOR <span className="text-[#E5F552] font-bold">HACKER HOUSE GOA 2026</span></p>
-          </div>
+          {/* Subtitle Line */}
+          <p className="font-terminal text-xs sm:text-sm text-stone-300 uppercase tracking-wide">
+            YOUR PHOTO. YOUR STACK. YOUR STORY. BUILT FOR <span className="text-[#E5F552] font-bold">HACKER HOUSE GOA 2026</span>
+          </p>
 
-          {/* 2 FORMAT CHOICES GRID (FORMAT A: 𝕏 PFP FRAME vs FORMAT B: BUILDER ID CARD) */}
-          <div className="pt-4 grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+          {/* 2 FORMAT CHOICES GRID (COMPACT SINGLE VIEWPORT CARDS) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left pt-1">
             {/* FORMAT B: OFFICIAL BUILDER ID CARD */}
             <div
               onClick={onStartIdCard}
-              className="group relative p-7 bg-[#0D2818]/90 border-2 border-[#E5F552]/40 rounded-3xl space-y-5 hover:border-[#E5F552] hover:scale-[1.02] cursor-pointer transition-all shadow-[0_20px_50px_rgba(0,0,0,0.6)] backdrop-blur-md overflow-hidden"
+              className="group relative p-4 sm:p-5 bg-[#0D2818]/90 border-2 border-[#E5F552]/40 rounded-2xl space-y-2.5 hover:border-[#E5F552] hover:scale-[1.01] cursor-pointer transition-all shadow-xl backdrop-blur-md overflow-hidden"
             >
-              <div className="absolute -right-8 -bottom-8 w-40 h-40 bg-[#E5F552]/5 rounded-full blur-2xl group-hover:bg-[#E5F552]/15 transition-all"></div>
-
               <div className="flex items-center justify-between">
-                <div className="w-14 h-14 rounded-2xl bg-[#163824] border border-[#E5F552]/50 flex items-center justify-center text-[#E5F552] group-hover:bg-[#E5F552] group-hover:text-[#0A1D13] transition-all shadow-lg">
-                  <CreditCard className="w-7 h-7" />
+                <div className="w-10 h-10 rounded-xl bg-[#163824] border border-[#E5F552]/50 flex items-center justify-center text-[#E5F552] group-hover:bg-[#E5F552] group-hover:text-[#0A1D13] transition-all">
+                  <CreditCard className="w-5 h-5" />
                 </div>
-                <span className="px-3 py-1 rounded-full bg-[#163824] border border-[#E5F552]/40 font-terminal text-xs text-[#E5F552] font-bold uppercase tracking-wider">
+                <span className="px-2.5 py-0.5 rounded-full bg-[#163824] border border-[#E5F552]/40 font-terminal text-[10px] text-[#E5F552] font-bold uppercase tracking-wider">
                   FORMAT B
                 </span>
               </div>
 
               <div>
-                <h3 className="font-display font-black text-3xl text-[#F3F0E6] uppercase group-hover:text-[#E5F552] transition-colors">
+                <h3 className="font-display font-black text-xl sm:text-2xl text-[#F3F0E6] uppercase group-hover:text-[#E5F552] transition-colors leading-tight">
                   OFFICIAL BUILDER ID CARD
                 </h3>
-                <p className="font-terminal text-xs text-stone-300 mt-2 leading-relaxed">
-                  Complete 4" x 6" physical ID badge featuring an interactive E-Paper display studio, customizable action buttons, 8-bit roaming pet, and 4-page PDF flip export.
+                <p className="font-terminal text-[11px] text-stone-300 mt-1 line-clamp-2">
+                  Complete 4" x 6" physical ID badge with E-Paper studio, action buttons, 8-bit pet, and 4-page PDF flip export.
                 </p>
               </div>
 
-              <div className="pt-3 flex items-center justify-between border-t border-[#1B422B]">
-                <span className="font-terminal text-[10px] text-stone-400 uppercase font-bold flex items-center gap-1">
-                  <Award className="w-3.5 h-3.5 text-[#E5F552]" /> 4-PAGE PDF + INTERACTIVE HTML
+              <div className="pt-2 flex items-center justify-between border-t border-[#1B422B]">
+                <span className="font-terminal text-[9px] text-stone-400 uppercase font-bold flex items-center gap-1">
+                  <Award className="w-3 h-3 text-[#E5F552]" /> 4-PAGE PDF + HTML
                 </span>
-                <span className="font-display font-black text-sm text-[#E5F552] uppercase flex items-center gap-1.5 group-hover:translate-x-1 transition-transform">
-                  BUILD ID CARD <ArrowRight className="w-4 h-4" />
+                <span className="font-display font-black text-xs text-[#E5F552] uppercase flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                  BUILD ID CARD <ArrowRight className="w-3.5 h-3.5" />
                 </span>
               </div>
             </div>
@@ -116,49 +113,47 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartIdCard, onStart
             {/* FORMAT A: 𝕏 PFP FRAME / OVERLAY */}
             <div
               onClick={onStartPfpFrame}
-              className="group relative p-7 bg-[#0D2818]/90 border-2 border-[#FF5E97]/40 rounded-3xl space-y-5 hover:border-[#FF5E97] hover:scale-[1.02] cursor-pointer transition-all shadow-[0_20px_50px_rgba(0,0,0,0.6)] backdrop-blur-md overflow-hidden"
+              className="group relative p-4 sm:p-5 bg-[#0D2818]/90 border-2 border-[#FF5E97]/40 rounded-2xl space-y-2.5 hover:border-[#FF5E97] hover:scale-[1.01] cursor-pointer transition-all shadow-xl backdrop-blur-md overflow-hidden"
             >
-              <div className="absolute -right-8 -bottom-8 w-40 h-40 bg-[#FF5E97]/5 rounded-full blur-2xl group-hover:bg-[#FF5E97]/15 transition-all"></div>
-
               <div className="flex items-center justify-between">
-                <div className="w-14 h-14 rounded-2xl bg-[#163824] border border-[#FF5E97]/50 flex items-center justify-center text-[#FF5E97] group-hover:bg-[#FF5E97] group-hover:text-white transition-all shadow-lg">
-                  <UserCheck className="w-7 h-7" />
+                <div className="w-10 h-10 rounded-xl bg-[#163824] border border-[#FF5E97]/50 flex items-center justify-center text-[#FF5E97] group-hover:bg-[#FF5E97] group-hover:text-white transition-all">
+                  <UserCheck className="w-5 h-5" />
                 </div>
-                <span className="px-3 py-1 rounded-full bg-[#163824] border border-[#FF5E97]/40 font-terminal text-xs text-[#FF5E97] font-bold uppercase tracking-wider">
+                <span className="px-2.5 py-0.5 rounded-full bg-[#163824] border border-[#FF5E97]/40 font-terminal text-[10px] text-[#FF5E97] font-bold uppercase tracking-wider">
                   FORMAT A
                 </span>
               </div>
 
               <div>
-                <h3 className="font-display font-black text-3xl text-[#F3F0E6] uppercase group-hover:text-[#FF5E97] transition-colors">
+                <h3 className="font-display font-black text-xl sm:text-2xl text-[#F3F0E6] uppercase group-hover:text-[#FF5E97] transition-colors leading-tight">
                   𝕏 PFP FRAME / OVERLAY
                 </h3>
-                <p className="font-terminal text-xs text-stone-300 mt-2 leading-relaxed">
-                  1:1 Square ratio profile picture wrapped in HH Goa 2026 tropical branding, `#FrameInGoa` hashtags, crop/rotate controls, and 8-bit B&W Atkinson dithering filter.
+                <p className="font-terminal text-[11px] text-stone-300 mt-1 line-clamp-2">
+                  1:1 Square ratio profile picture with HH Goa branding, `#FrameInGoa` hashtags, cropper, and 8-bit Atkinson dithering.
                 </p>
               </div>
 
-              <div className="pt-3 flex items-center justify-between border-t border-[#1B422B]">
-                <span className="font-terminal text-[10px] text-stone-400 uppercase font-bold flex items-center gap-1">
-                  <Flame className="w-3.5 h-3.5 text-[#FF5E97]" /> 4 THEMES + 8-BIT DITHER
+              <div className="pt-2 flex items-center justify-between border-t border-[#1B422B]">
+                <span className="font-terminal text-[9px] text-stone-400 uppercase font-bold flex items-center gap-1">
+                  <Flame className="w-3 h-3 text-[#FF5E97]" /> 4 THEMES + 8-BIT DITHER
                 </span>
-                <span className="font-display font-black text-sm text-[#FF5E97] uppercase flex items-center gap-1.5 group-hover:translate-x-1 transition-transform">
-                  CREATE 𝕏 PFP <ArrowRight className="w-4 h-4" />
+                <span className="font-display font-black text-xs text-[#FF5E97] uppercase flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                  CREATE 𝕏 PFP <ArrowRight className="w-3.5 h-3.5" />
                 </span>
               </div>
             </div>
           </div>
 
-          <p className="font-terminal text-xs text-stone-400 flex items-center justify-center gap-1.5 uppercase tracking-wider pt-2">
-            <ShieldCheck className="w-4 h-4 text-[#E5F552]" /> NO SIGNUP OR LOGIN REQUIRED.
+          <p className="font-terminal text-[10px] text-stone-400 flex items-center justify-center gap-1 uppercase tracking-wider">
+            <ShieldCheck className="w-3.5 h-3.5 text-[#E5F552]" /> NO SIGNUP OR LOGIN REQUIRED.
           </p>
         </div>
       </section>
 
       {/* ========================================================================= */}
-      {/* SECTION 2: FOOTER SECTION (GOA COCONUT TREES BACKGROUND + TEAM PORYGON)   */}
+      {/* SECTION 2: FOOTER SECTION (COMPACT FIT AT BOTTOM OF VIEWPORT)              */}
       {/* ========================================================================= */}
-      <footer className="relative border-t-2 border-[#163824] overflow-hidden text-center mt-12">
+      <footer className="relative border-t-2 border-[#163824] overflow-hidden text-center shrink-0 mt-2">
         {/* Background Image: Goa Coconut Trees Overlay */}
         <div className="absolute inset-0 z-0">
           <img
@@ -170,18 +165,16 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartIdCard, onStart
         </div>
 
         {/* Footer Content */}
-        <div className="relative z-10 max-w-5xl mx-auto px-4 py-12 space-y-4">
-          <div className="flex items-center justify-center gap-2">
-            <span className="font-display font-black text-2xl sm:text-3xl text-[#E5F552] uppercase tracking-wider flex items-center gap-2">
-              MADE WITH <Heart className="w-6 h-6 text-[#FF5E97] fill-current inline-block animate-bounce" /> BY TEAM PORYGON
-            </span>
+        <div className="relative z-10 max-w-5xl mx-auto px-4 py-2.5 flex flex-col sm:flex-row items-center justify-between gap-2">
+          <div className="flex items-center gap-1.5 font-display font-black text-base sm:text-lg text-[#E5F552] uppercase tracking-wider">
+            MADE WITH <Heart className="w-4 h-4 text-[#FF5E97] fill-current inline-block animate-bounce" /> BY TEAM PORYGON
           </div>
 
-          <p className="font-terminal text-xs text-stone-400 uppercase tracking-widest">
-            HACKER HOUSE GOA 2026 OFFICIAL EVENT SUBMISSION · TASK 1
+          <p className="font-terminal text-[10px] text-stone-400 uppercase tracking-widest">
+            HACKER HOUSE GOA 2026 TASK 1
           </p>
 
-          <div className="pt-2 flex justify-center items-center gap-4 text-xs font-terminal text-[#E5F552]">
+          <div className="flex items-center gap-3 text-[10px] font-terminal text-[#E5F552]">
             <a href="https://hhgoa.com" target="_blank" rel="noopener noreferrer" className="hover:underline">
               HHGOA.COM
             </a>
