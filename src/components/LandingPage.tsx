@@ -11,7 +11,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartIdCard, onStart
     <div className="relative min-h-[85vh] flex flex-col justify-between text-center overflow-hidden">
       
       {/* ========================================================================= */}
-      {/* SECTION 1: HERO SECTION (PERFECT LAYOUT WITH GOA SUNSET BACKGROUND)      */}
+      {/* SECTION 1: HERO SECTION                                                   */}
       {/* ========================================================================= */}
       <section className="relative px-4 py-8 flex flex-col items-center justify-center flex-1">
         {/* Goa Beach Sunset Background Overlay */}
@@ -151,37 +151,37 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartIdCard, onStart
       </section>
 
       {/* ========================================================================= */}
-      {/* SECTION 2: CLEAN FOOTER (ONLY TEAM PORYGON CREDITS + GOA COCONUT TREES)  */}
+      {/* SECTION 2: PROMINENT & BIGGER FOOTER WITH GOA COCONUT TREES               */}
       {/* ========================================================================= */}
-      <footer className="relative border-t-2 border-[#163824] overflow-hidden text-center mt-4 shrink-0">
+      <footer className="relative border-t-2 border-[#163824] overflow-hidden text-center mt-6 shrink-0">
         {/* Background Image: Goa Coconut Trees Overlay */}
         <div className="absolute inset-0 z-0">
           <img
             src="/assets/goa_coconut_trees.jpg"
             alt="Goa Coconut Trees"
-            className="w-full h-full object-cover opacity-25 filter saturate-150"
+            className="w-full h-full object-cover opacity-30 filter saturate-150"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0A1D13] via-[#0A1D13]/90 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0A1D13] via-[#0A1D13]/85 to-transparent"></div>
         </div>
 
-        {/* Footer Content */}
-        <div className="relative z-10 max-w-5xl mx-auto px-4 py-5 space-y-2">
+        {/* Footer Content — Bigger & Prominent */}
+        <div className="relative z-10 max-w-5xl mx-auto px-4 py-8 sm:py-10 space-y-3">
           <div className="flex items-center justify-center gap-2">
-            <span className="font-display font-black text-xl sm:text-2xl text-[#E5F552] uppercase tracking-wider flex items-center justify-center gap-2">
-              MADE WITH <Heart className="w-5 h-5 text-[#FF5E97] fill-current inline-block animate-bounce" /> BY TEAM PORYGON
+            <span className="font-display font-black text-3xl sm:text-5xl text-[#E5F552] uppercase tracking-wider drop-shadow-[0_0_20px_rgba(229,245,82,0.3)] flex items-center justify-center gap-3">
+              MADE WITH <Heart className="w-7 h-7 sm:w-10 sm:h-10 text-[#FF5E97] fill-current inline-block animate-bounce drop-shadow-[0_0_15px_rgba(255,94,151,0.8)]" /> BY TEAM PORYGON
             </span>
           </div>
 
-          <p className="font-terminal text-[11px] text-stone-300 uppercase tracking-widest font-bold">
+          <p className="font-terminal text-xs sm:text-sm text-stone-200 uppercase tracking-widest font-bold drop-shadow">
             HACKER HOUSE GOA 2026 OFFICIAL EVENT SUBMISSION · TASK 1
           </p>
 
-          <div className="pt-1 flex items-center justify-center gap-4 text-xs font-terminal text-[#E5F552] font-bold">
-            <a href="https://hhgoa.com" target="_blank" rel="noopener noreferrer" className="hover:underline">
+          <div className="pt-2 flex items-center justify-center gap-6 text-sm sm:text-base font-terminal text-[#E5F552] font-bold tracking-wider">
+            <a href="https://hhgoa.com" target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-[#FF5E97] transition-colors">
               HHGOA.COM
             </a>
             <span>·</span>
-            <a href="https://github.com/shamsundarsk/hhgoa" target="_blank" rel="noopener noreferrer" className="hover:underline">
+            <a href="https://github.com/shamsundarsk/hhgoa" target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-[#FF5E97] transition-colors">
               GITHUB REPO
             </a>
           </div>
