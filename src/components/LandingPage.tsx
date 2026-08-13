@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Sparkles, ShieldCheck, Palmtree, UserCheck, CreditCard, Flame, Award, Heart } from 'lucide-react';
+import { ArrowRight, Sparkles, ShieldCheck, Palmtree, UserCheck, CreditCard, Flame, Award, Heart, Crop, Sliders, Download } from 'lucide-react';
 
 interface LandingPageProps {
   onStartIdCard: () => void;
@@ -8,12 +8,12 @@ interface LandingPageProps {
 
 export const LandingPage: React.FC<LandingPageProps> = ({ onStartIdCard, onStartPfpFrame }) => {
   return (
-    <div className="relative h-[calc(100vh-65px)] max-h-[calc(100vh-65px)] flex flex-col justify-between text-center overflow-hidden p-2 sm:p-4">
+    <div className="relative min-h-[85vh] flex flex-col justify-between text-center overflow-hidden">
       
       {/* ========================================================================= */}
-      {/* SECTION 1: HERO SECTION (COMPACT 100% SINGLE VIEWPORT FIT)                 */}
+      {/* SECTION 1: HERO SECTION (PERFECT LAYOUT WITH GOA SUNSET BACKGROUND)      */}
       {/* ========================================================================= */}
-      <section className="relative flex-1 flex flex-col items-center justify-center px-2 py-2">
+      <section className="relative px-4 py-8 flex flex-col items-center justify-center flex-1">
         {/* Goa Beach Sunset Background Overlay */}
         <div className="absolute inset-0 z-0">
           <img
@@ -75,7 +75,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartIdCard, onStart
             YOUR PHOTO. YOUR STACK. YOUR STORY. BUILT FOR <span className="text-[#E5F552] font-bold">HACKER HOUSE GOA 2026</span>
           </p>
 
-          {/* 2 FORMAT CHOICES GRID (COMPACT SINGLE VIEWPORT CARDS) */}
+          {/* 2 FORMAT CHOICES GRID */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left pt-1">
             {/* FORMAT B: OFFICIAL BUILDER ID CARD */}
             <div
@@ -151,9 +151,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartIdCard, onStart
       </section>
 
       {/* ========================================================================= */}
-      {/* SECTION 2: FOOTER SECTION (COMPACT FIT AT BOTTOM OF VIEWPORT)              */}
+      {/* SECTION 2: RESTORED FULL FOOTER (VALUE PROPS + COCONUT TREES + TEAM PORYGON)*/}
       {/* ========================================================================= */}
-      <footer className="relative border-t-2 border-[#163824] overflow-hidden text-center shrink-0 mt-2">
+      <footer className="relative border-t-2 border-[#163824] overflow-hidden text-center mt-6">
         {/* Background Image: Goa Coconut Trees Overlay */}
         <div className="absolute inset-0 z-0">
           <img
@@ -165,23 +165,53 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartIdCard, onStart
         </div>
 
         {/* Footer Content */}
-        <div className="relative z-10 max-w-5xl mx-auto px-4 py-2.5 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <div className="flex items-center gap-1.5 font-display font-black text-base sm:text-lg text-[#E5F552] uppercase tracking-wider">
-            MADE WITH <Heart className="w-4 h-4 text-[#FF5E97] fill-current inline-block animate-bounce" /> BY TEAM PORYGON
+        <div className="relative z-10 max-w-5xl mx-auto px-4 py-8 space-y-6">
+          {/* Restored 3 Value Props Bar */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
+            <div className="p-3.5 rounded-2xl bg-[#0D2818]/80 border border-[#1B422B] backdrop-blur-md shadow-lg space-y-1">
+              <div className="flex items-center gap-2 text-[#E5F552]">
+                <Crop className="w-4 h-4" />
+                <p className="font-terminal font-bold text-xs uppercase tracking-wider">NO CROPPING FRICTION</p>
+              </div>
+              <p className="font-body text-[11px] text-stone-400">HEIC, PNG, JPG cropper with 360° rotation</p>
+            </div>
+
+            <div className="p-3.5 rounded-2xl bg-[#0D2818]/80 border border-[#1B422B] backdrop-blur-md shadow-lg space-y-1">
+              <div className="flex items-center gap-2 text-[#FF5E97]">
+                <Sliders className="w-4 h-4" />
+                <p className="font-terminal font-bold text-xs uppercase tracking-wider">CANVA-LITE DIY STUDIO</p>
+              </div>
+              <p className="font-body text-[11px] text-stone-400">Atkinson B&W Dithering & 5 GameBoy Palettes</p>
+            </div>
+
+            <div className="p-3.5 rounded-2xl bg-[#0D2818]/80 border border-[#1B422B] backdrop-blur-md shadow-lg space-y-1">
+              <div className="flex items-center gap-2 text-[#E5F552]">
+                <Download className="w-4 h-4" />
+                <p className="font-terminal font-bold text-xs uppercase tracking-wider">HIGH-DPI PNG & 𝕏</p>
+              </div>
+              <p className="font-body text-[11px] text-stone-400">Instant PNG export & #FrameInGoa</p>
+            </div>
           </div>
 
-          <p className="font-terminal text-[10px] text-stone-400 uppercase tracking-widest">
-            HACKER HOUSE GOA 2026 TASK 1
-          </p>
+          {/* Team Porygon Credits & Links */}
+          <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-[#1B422B]">
+            <div className="flex items-center gap-1.5 font-display font-black text-lg sm:text-xl text-[#E5F552] uppercase tracking-wider">
+              MADE WITH <Heart className="w-5 h-5 text-[#FF5E97] fill-current inline-block animate-bounce" /> BY TEAM PORYGON
+            </div>
 
-          <div className="flex items-center gap-3 text-[10px] font-terminal text-[#E5F552]">
-            <a href="https://hhgoa.com" target="_blank" rel="noopener noreferrer" className="hover:underline">
-              HHGOA.COM
-            </a>
-            <span>·</span>
-            <a href="https://github.com/shamsundarsk/hhgoa" target="_blank" rel="noopener noreferrer" className="hover:underline">
-              GITHUB REPO
-            </a>
+            <p className="font-terminal text-xs text-stone-400 uppercase tracking-widest">
+              HACKER HOUSE GOA 2026 OFFICIAL EVENT SUBMISSION · TASK 1
+            </p>
+
+            <div className="flex items-center gap-3 text-xs font-terminal text-[#E5F552]">
+              <a href="https://hhgoa.com" target="_blank" rel="noopener noreferrer" className="hover:underline">
+                HHGOA.COM
+              </a>
+              <span>·</span>
+              <a href="https://github.com/shamsundarsk/hhgoa" target="_blank" rel="noopener noreferrer" className="hover:underline">
+                GITHUB REPO
+              </a>
+            </div>
           </div>
         </div>
       </footer>
