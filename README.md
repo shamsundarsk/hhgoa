@@ -15,17 +15,6 @@ The **HH GOA 2026 Builder Identity Studio** allows developers, hackers, and crea
 
 ---
 
-## 📽️ Video Walkthrough & Workflow Guide
-
-*(Video tutorial showing the complete creation workflow will be added here)*
-
-```markdown
-<!-- WORKFLOW VIDEO PLACEHOLDER -->
-[![Hacker House Goa 2026 Workflow Guide](https://img.youtube.com/vi/YOUR_VIDEO_ID/maxresdefault.jpg)](https://www.youtube.com/watch?v=YOUR_VIDEO_ID)
-```
-
----
-
 ## ✨ Key Features
 
 - **🚀 Two Creation Formats**:
