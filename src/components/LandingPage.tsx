@@ -18,29 +18,38 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartIdCard, onStart
 
       {/* Main Content Box */}
       <div className="relative z-10 max-w-5xl space-y-10">
-        {/* Top Event Tagline Badge */}
-        <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#163824]/90 border border-[#E5F552]/40 text-xs sm:text-sm font-terminal text-[#E5F552] shadow-[0_0_30px_rgba(229,245,82,0.2)] uppercase tracking-widest animate-float backdrop-blur-md">
-          <Palmtree className="w-4 h-4 text-[#E5F552]" />
-          <span>HACKER HOUSE GOA 2026 OFFICIAL STUDIO</span>
-          <Sparkles className="w-4 h-4 fill-current text-[#FF5E97]" />
+        {/* Top Event Tagline & 2:47PM Studio Logo Header */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <img
+            src="/assets/247_studio_logo.png"
+            alt="2:47PM Studio"
+            className="h-10 sm:h-12 w-auto object-contain drop-shadow-[0_0_20px_rgba(229,245,82,0.4)]"
+          />
+
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#163824]/90 border border-[#E5F552]/40 text-xs sm:text-sm font-terminal text-[#E5F552] shadow-[0_0_30px_rgba(229,245,82,0.2)] uppercase tracking-widest animate-float backdrop-blur-md">
+            <Palmtree className="w-4 h-4 text-[#E5F552]" />
+            <span>HACKER HOUSE GOA 2026 OFFICIAL STUDIO</span>
+            <Sparkles className="w-4 h-4 fill-current text-[#FF5E97]" />
+          </div>
         </div>
 
-        {/* Main Header Typography — Bebas Neue + Hot-Pink Glowing "गोवा" Script Overlay */}
+        {/* Main Header Typography — Bebas Neue + Official Hot-Pink "गोवा" Logo Image */}
         <div className="space-y-4 flex flex-col items-center">
           <h1 className="font-display font-black text-6xl sm:text-9xl tracking-tight text-[#E5F552] leading-[0.88] uppercase drop-shadow-[0_10px_30px_rgba(229,245,82,0.3)] flex items-center justify-center gap-3">
             HACKER HOUSE
           </h1>
 
-          {/* Guaranteed Vector / Styled "गोवा" Hot-Pink Glowing Text Logo */}
-          <div className="relative my-2 py-1 px-8">
-            <span className="font-display font-black text-6xl sm:text-8xl text-[#FF5E97] tracking-wider uppercase inline-block -rotate-3 transform drop-shadow-[0_0_35px_rgba(255,94,151,0.9)] animate-pulse">
-              गोवा
-            </span>
-            <div className="absolute -top-3 -right-2 transform rotate-12">
-              <span className="px-3 py-1 rounded-full bg-[#E5F552] text-[#0A1D13] font-terminal text-[10px] sm:text-xs font-black shadow-xl uppercase">
-                EDITION 2026
-              </span>
-            </div>
+          {/* Official Hot-Pink "गोवा" Script Image Asset */}
+          <div className="relative my-2 flex items-center justify-center">
+            <img
+              src="/assets/media__1786506921751.png"
+              alt="गोवा"
+              className="h-28 sm:h-40 w-auto object-contain drop-shadow-[0_0_40px_rgba(255,94,151,0.95)] animate-pulse"
+              onError={(e) => {
+                // Fallback to text if asset fails
+                e.currentTarget.style.display = 'none';
+              }}
+            />
           </div>
 
           <div className="pt-2">
