@@ -19,16 +19,16 @@ export const RoamingPixelPet: React.FC<{ petType: PetOption }> = ({ petType }) =
   if (!petType || petType === 'none') return null;
 
   return (
-    <div className="w-full relative h-7 overflow-hidden pointer-events-none flex items-center shrink-0 my-0.5">
+    <div className="w-full relative h-6 overflow-hidden pointer-events-none flex items-center shrink-0 my-0.5">
       <div className="animate-roam-pet whitespace-nowrap">
         {petType === 'dog' ? (
-          <PixelCatSprite size={28} color="#FF5E97" />
+          <PixelCatSprite size={24} color="#FF5E97" />
         ) : petType === 'crab' ? (
-          <PixelCatSprite size={28} color="#A3E635" />
+          <PixelCatSprite size={24} color="#A3E635" />
         ) : petType === 'bot' ? (
-          <PixelCatSprite size={28} color="#38BDF8" />
+          <PixelCatSprite size={24} color="#38BDF8" />
         ) : (
-          <PixelCatSprite size={28} color="#121913" />
+          <PixelCatSprite size={24} color="#121913" />
         )}
       </div>
     </div>
@@ -38,23 +38,20 @@ export const RoamingPixelPet: React.FC<{ petType: PetOption }> = ({ petType }) =
 export const BadgeCard: React.FC<BadgeCardProps> = ({
   cardState,
   onButtonClick,
-  isFlipped: controlledIsFlipped,
+  isFlipped: externalIsFlipped,
   onToggleFlip,
   showLanyard = true
 }) => {
   const [internalIsFlipped, setInternalIsFlipped] = useState<boolean>(false);
-  const isFlipped = controlledIsFlipped !== undefined ? controlledIsFlipped : internalIsFlipped;
+  const isFlipped = externalIsFlipped !== undefined ? externalIsFlipped : internalIsFlipped;
 
   const handleFlipToggle = () => {
-    if (onToggleFlip) {
-      onToggleFlip(!isFlipped);
-    } else {
-      setInternalIsFlipped(!internalIsFlipped);
-    }
+    const nextFlipped = !isFlipped;
+    setInternalIsFlipped(nextFlipped);
+    if (onToggleFlip) onToggleFlip(nextFlipped);
   };
 
-  const { profile, builderTitle, display, metadata } = cardState;
-
+  const { profile, display, builderTitle, metadata } = cardState;
   const buttons = display.buttons || {
     button1: { id: 'button1', label: '(A) PROFILE', icon: 'user', assignedTemplate: 'PROFILE_CLASSIC' },
     button2: { id: 'button2', label: '(B) PROJECTS', icon: 'code', assignedTemplate: 'STATS_GRID' },
@@ -62,46 +59,46 @@ export const BadgeCard: React.FC<BadgeCardProps> = ({
     activeButtonId: 'button1'
   };
 
-  const getFontClass = (fontName: string) => {
-    switch (fontName) {
-      case 'HH TERMINAL': return 'font-terminal';
-      case 'HH MONO': return 'font-terminal';
-      case 'HH PIXEL': return 'font-pixel text-xs leading-tight';
-      case 'HH ZINE': return 'font-serif italic';
+  const getFontClass = (fontKey?: string) => {
+    switch (fontKey) {
+      case 'PIXEL': return 'font-pixel';
+      case 'TERMINAL': return 'font-terminal';
+      case 'SERIF': return 'font-serif';
       default: return 'font-display';
     }
   };
 
+  // Render individual display element blocks inside E-Paper LCD screen
   const renderElement = (elem: DisplayElement) => {
     switch (elem.type) {
       case 'profile':
         return (
-          <div key={elem.id} className="flex items-center gap-3.5 pb-2 border-b border-[#121913]/15 shrink-0">
+          <div key={elem.id} className="flex gap-2.5 items-center shrink-0">
             {profile.photoUrl ? (
               <img
                 src={profile.photoUrl}
                 alt={profile.name}
-                className="w-16 h-16 rounded-xl object-cover border-2 border-[#121913] shadow-md shrink-0"
+                className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl object-cover border-2 border-[#121913] shadow-md shrink-0"
               />
             ) : (
-              <div className="w-16 h-16 rounded-xl bg-[#121913]/10 border-2 border-[#121913] flex items-center justify-center shrink-0">
-                <Terminal className="w-7 h-7 text-[#121913]" />
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-[#121913]/10 border-2 border-[#121913] flex items-center justify-center shrink-0">
+                <Terminal className="w-6 h-6 text-[#121913]" />
               </div>
             )}
             <div className="flex-1 min-w-0">
-              <h3 className="text-3xl font-display font-black leading-none uppercase tracking-tight text-[#121913] truncate">
+              <h3 className="text-xl sm:text-2xl font-display font-black leading-none uppercase tracking-tight text-[#121913] truncate">
                 {profile.name || 'ANONYMOUS BUILDER'}
               </h3>
-              <p className="text-xs font-terminal font-semibold text-[#121913]/70 truncate mt-0.5">
+              <p className="text-[10px] sm:text-xs font-terminal font-semibold text-[#121913]/75 truncate mt-0.5">
                 {profile.handle || '@builder'}
               </p>
-              <div className="flex items-center gap-1.5 mt-1">
-                <span className="inline-block px-2 py-0.5 rounded bg-[#121913] text-[#D8DFC6] text-xs font-terminal font-bold uppercase tracking-wider">
+              <div className="flex items-center gap-1 mt-0.5">
+                <span className="inline-block px-1.5 py-0.5 rounded bg-[#121913] text-[#D8DFC6] text-[9px] sm:text-[10px] font-terminal font-bold uppercase tracking-wider">
                   {profile.role || 'BUILDER'}
                 </span>
                 {profile.location && (
-                  <span className="text-xs font-terminal text-[#121913]/80 flex items-center gap-1 truncate font-medium uppercase">
-                    <MapPin className="w-3.5 h-3.5 text-[#121913]/70 shrink-0" /> {profile.location}
+                  <span className="text-[9px] sm:text-[10px] font-terminal text-[#121913]/80 flex items-center gap-0.5 truncate font-medium uppercase">
+                    <MapPin className="w-3 h-3 text-[#121913]/70 shrink-0" /> {profile.location}
                   </span>
                 )}
               </div>
@@ -111,11 +108,11 @@ export const BadgeCard: React.FC<BadgeCardProps> = ({
 
       case 'title':
         return (
-          <div key={elem.id} className="p-2.5 bg-[#121913]/5 border border-[#121913]/25 rounded-xl text-center shadow-inner shrink-0">
-            <p className="text-[10px] font-terminal uppercase tracking-widest text-[#121913]/60 font-bold">
+          <div key={elem.id} className="py-1 px-2 sm:py-1.5 sm:px-2.5 bg-[#121913]/5 border border-[#121913]/25 rounded-xl text-center shadow-inner shrink-0">
+            <p className="text-[8px] sm:text-[9px] font-terminal uppercase tracking-widest text-[#121913]/60 font-bold">
               BUILDER TITLE
             </p>
-            <h4 className="text-3xl font-display font-black tracking-wide text-[#121913] uppercase leading-none mt-0.5">
+            <h4 className="text-base sm:text-xl font-display font-black tracking-wide text-[#121913] uppercase leading-none mt-0.5 truncate">
               ⚡ {builderTitle}
             </h4>
           </div>
@@ -124,21 +121,21 @@ export const BadgeCard: React.FC<BadgeCardProps> = ({
       case 'stack':
         return (
           <div key={elem.id} className="shrink-0">
-            <p className="text-[10px] font-terminal font-bold uppercase tracking-wider text-[#121913]/60 mb-1">
+            <p className="text-[8px] sm:text-[9px] font-terminal font-bold uppercase tracking-wider text-[#121913]/60 mb-0.5">
               STACK
             </p>
-            <div className="flex flex-wrap gap-1.5">
+            <div className="flex flex-wrap gap-1">
               {profile.stack && profile.stack.length > 0 ? (
-                profile.stack.map((tech, idx) => (
+                profile.stack.slice(0, 4).map((tech, idx) => (
                   <span
                     key={idx}
-                    className="px-2 py-0.5 bg-[#121913]/10 border border-[#121913]/30 rounded-md text-xs font-terminal font-bold text-[#121913] uppercase"
+                    className="px-1.5 py-0.5 bg-[#121913]/10 border border-[#121913]/30 rounded text-[9px] sm:text-[10px] font-terminal font-bold text-[#121913] uppercase"
                   >
                     {tech}
                   </span>
                 ))
               ) : (
-                <span className="text-xs font-terminal text-stone-600">PYTHON · REACT · AI</span>
+                <span className="text-[10px] font-terminal text-stone-600">PYTHON · REACT · AI</span>
               )}
             </div>
           </div>
@@ -146,8 +143,8 @@ export const BadgeCard: React.FC<BadgeCardProps> = ({
 
       case 'quote':
         return (
-          <div key={elem.id} className="p-2 italic text-center border-l-3 border-[#121913] bg-[#121913]/5 rounded-r shrink-0">
-            <p className="text-xs sm:text-sm font-body font-medium text-[#121913] line-clamp-2">
+          <div key={elem.id} className="p-1.5 italic text-center border-l-2 border-[#121913] bg-[#121913]/5 rounded-r shrink-0">
+            <p className="text-[10px] sm:text-xs font-body font-medium text-[#121913] line-clamp-2">
               {profile.quote || '"Ship first. Explain later."'}
             </p>
           </div>
@@ -155,12 +152,12 @@ export const BadgeCard: React.FC<BadgeCardProps> = ({
 
       case 'status':
         return (
-          <div key={elem.id} className="p-2 border border-[#121913]/35 rounded-xl bg-[#121913]/5 flex flex-col gap-1.5 shrink-0">
-            <div className="flex justify-between items-center text-xs font-terminal font-bold text-[#121913] uppercase">
+          <div key={elem.id} className="p-1.5 border border-[#121913]/35 rounded-xl bg-[#121913]/5 flex flex-col gap-1 shrink-0">
+            <div className="flex justify-between items-center text-[10px] sm:text-xs font-terminal font-bold text-[#121913] uppercase">
               <span className="truncate">{profile.statusMessage || 'STATUS: SHIPPING'}</span>
-              <span className="flex items-center gap-1 shrink-0"><Coffee className="w-3.5 h-3.5 text-[#121913]" /> {profile.coffeeCount} COFFEES</span>
+              <span className="flex items-center gap-1 shrink-0"><Coffee className="w-3 h-3 text-[#121913]" /> {profile.coffeeCount} COFFEES</span>
             </div>
-            <div className="w-full bg-[#121913]/20 h-2.5 rounded-full overflow-hidden p-0.5">
+            <div className="w-full bg-[#121913]/20 h-2 rounded-full overflow-hidden p-0.5">
               <div className="bg-[#121913] h-full rounded-full w-[82%]" />
             </div>
           </div>
@@ -168,54 +165,54 @@ export const BadgeCard: React.FC<BadgeCardProps> = ({
 
       case 'stats':
         return (
-          <div key={elem.id} className="border border-[#121913]/30 rounded-xl bg-[#121913]/5 p-2 grid grid-cols-4 divide-x divide-[#121913]/20 text-center shrink-0">
-            <div className="px-1">
+          <div key={elem.id} className="border border-[#121913]/30 rounded-xl bg-[#121913]/5 p-1.5 grid grid-cols-4 divide-x divide-[#121913]/20 text-center shrink-0">
+            <div className="px-0.5">
               <div className="flex items-center justify-center text-[#121913]">
-                <Code className="w-4 h-4" />
+                <Code className="w-3.5 h-3.5" />
               </div>
-              <p className="text-[9px] font-terminal font-bold text-[#121913]/70 mt-0.5">PROJECTS</p>
-              <p className="text-sm font-bold font-terminal text-[#121913]">{profile.stats.projects}</p>
+              <p className="text-[8px] font-terminal font-bold text-[#121913]/70 mt-0.5">PROJECTS</p>
+              <p className="text-xs font-bold font-terminal text-[#121913]">{profile.stats.projects}</p>
             </div>
-            <div className="px-1">
+            <div className="px-0.5">
               <div className="flex items-center justify-center text-[#121913]">
-                <Trophy className="w-4 h-4" />
+                <Trophy className="w-3.5 h-3.5" />
               </div>
-              <p className="text-[9px] font-terminal font-bold text-[#121913]/70 mt-0.5">HACKATHONS</p>
-              <p className="text-sm font-bold font-terminal text-[#121913]">{profile.stats.hackathons}</p>
+              <p className="text-[8px] font-terminal font-bold text-[#121913]/70 mt-0.5">HACKATHONS</p>
+              <p className="text-xs font-bold font-terminal text-[#121913]">{profile.stats.hackathons}</p>
             </div>
-            <div className="px-1">
+            <div className="px-0.5">
               <div className="flex items-center justify-center text-[#121913]">
-                <Flame className="w-4 h-4" />
+                <Flame className="w-3.5 h-3.5" />
               </div>
-              <p className="text-[9px] font-terminal font-bold text-[#121913]/70 mt-0.5">STREAK</p>
-              <p className="text-sm font-bold font-terminal text-[#121913]">{profile.stats.streak}D</p>
+              <p className="text-[8px] font-terminal font-bold text-[#121913]/70 mt-0.5">STREAK</p>
+              <p className="text-xs font-bold font-terminal text-[#121913]">{profile.stats.streak}D</p>
             </div>
-            <div className="px-1">
+            <div className="px-0.5">
               <div className="flex items-center justify-center text-[#121913]">
-                <Award className="w-4 h-4" />
+                <Award className="w-3.5 h-3.5" />
               </div>
-              <p className="text-[9px] font-terminal font-bold text-[#121913]/70 mt-0.5">RANK</p>
-              <p className="text-sm font-bold font-terminal text-[#121913]">{profile.stats.rank}</p>
+              <p className="text-[8px] font-terminal font-bold text-[#121913]/70 mt-0.5">RANK</p>
+              <p className="text-xs font-bold font-terminal text-[#121913]">{profile.stats.rank}</p>
             </div>
           </div>
         );
 
       case 'qr':
         return (
-          <div key={elem.id} className="p-3 bg-[#121913]/10 border border-[#121913]/30 rounded-xl flex items-center justify-between shadow-sm shrink-0">
-            <div className="space-y-1 min-w-0 pr-2">
-              <div className="flex items-center gap-1.5 text-[#121913] font-terminal font-bold text-xs uppercase">
-                <QrCode className="w-4 h-4" /> SCAN TO CONNECT
+          <div key={elem.id} className="p-2 bg-[#121913]/10 border border-[#121913]/30 rounded-xl flex items-center justify-between shadow-sm shrink-0">
+            <div className="space-y-0.5 min-w-0 pr-1.5">
+              <div className="flex items-center gap-1 text-[#121913] font-terminal font-bold text-[10px] sm:text-xs uppercase">
+                <QrCode className="w-3.5 h-3.5" /> SCAN TO CONNECT
               </div>
-              <p className="text-xs font-terminal text-[#121913]/80 font-semibold truncate max-w-[180px]">
+              <p className="text-[10px] sm:text-xs font-terminal text-[#121913]/80 font-semibold truncate max-w-[160px]">
                 {profile.github || profile.website || 'github.com/builder'}
               </p>
-              <span className="inline-block text-[10px] font-terminal text-[#121913]/60 uppercase">
+              <span className="inline-block text-[9px] font-terminal text-[#121913]/60 uppercase">
                 OFFICIAL BUILDER QR
               </span>
             </div>
-            <div className="p-1.5 bg-white rounded-lg border border-[#121913] shadow shrink-0">
-              <QRCodeSVG value={profile.github || profile.website || 'https://hhgoa.dev'} size={62} />
+            <div className="p-1 bg-white rounded-lg border border-[#121913] shadow shrink-0">
+              <QRCodeSVG value={profile.github || profile.website || 'https://hhgoa.dev'} size={54} />
             </div>
           </div>
         );
@@ -229,9 +226,9 @@ export const BadgeCard: React.FC<BadgeCardProps> = ({
         return (
           <div key={elem.id} className="p-1 border border-[#121913]/30 rounded-xl bg-[#121913]/5 flex justify-center shrink-0">
             {elem.content ? (
-              <img src={elem.content} alt="Custom Block" className="max-h-24 rounded-lg object-contain border border-[#121913]" />
+              <img src={elem.content} alt="Custom Block" className="max-h-20 rounded-lg object-contain border border-[#121913]" />
             ) : (
-              <div className="py-4 font-terminal text-xs text-[#121913]/60">Custom Image Block</div>
+              <div className="py-2 font-terminal text-xs text-[#121913]/60">Custom Image Block</div>
             )}
           </div>
         );
@@ -239,13 +236,13 @@ export const BadgeCard: React.FC<BadgeCardProps> = ({
       case 'text':
       case 'custom':
         return (
-          <div key={elem.id} className="p-2 border border-dashed border-[#121913]/40 rounded-lg bg-[#121913]/5 shrink-0">
+          <div key={elem.id} className="p-1.5 border border-dashed border-[#121913]/40 rounded-lg bg-[#121913]/5 shrink-0">
             {elem.label && (
-              <p className="text-[9px] font-terminal font-bold text-[#121913]/60 uppercase mb-0.5">
+              <p className="text-[8px] font-terminal font-bold text-[#121913]/60 uppercase mb-0.5">
                 {elem.label}
               </p>
             )}
-            <p className={`text-xs font-terminal font-medium text-[#121913] ${getFontClass(elem.style.font || display.font)}`}>
+            <p className={`text-[10px] sm:text-xs font-terminal font-medium text-[#121913] ${getFontClass(elem.style.font || display.font)}`}>
               {elem.content || 'Building things nobody asked for.'}
             </p>
           </div>
@@ -307,23 +304,23 @@ export const BadgeCard: React.FC<BadgeCardProps> = ({
 
           {/* LARGE SPACIOUS E-PAPER DISPLAY SCREEN BOX */}
           <div
-            className="absolute top-[31.2%] left-[5.5%] w-[89%] h-[52.0%] bg-[#D8DFC6] epaper-texture text-[#121913] rounded-2xl border-4 border-[#0d2216] epaper-screen-shadow p-3.5 flex flex-col justify-between overflow-hidden shadow-2xl z-10"
+            className="absolute top-[31.0%] left-[5.5%] w-[89%] h-[50.5%] bg-[#D8DFC6] epaper-texture text-[#121913] rounded-2xl border-4 border-[#0d2216] epaper-screen-shadow p-2.5 sm:p-3 flex flex-col justify-between overflow-hidden shadow-2xl z-10"
           >
             {/* Screen Header Bar */}
-            <div className="flex justify-between items-center text-xs font-terminal font-bold border-b border-[#121913]/25 pb-1 mb-1 text-[#121913] shrink-0">
-              <span className="flex items-center gap-1.5 uppercase truncate max-w-[200px]">
-                <span className="w-2 h-2 rounded-full bg-[#121913] animate-pulse" />
+            <div className="flex justify-between items-center text-[10px] sm:text-xs font-terminal font-bold border-b border-[#121913]/25 pb-0.5 mb-0.5 text-[#121913] shrink-0">
+              <span className="flex items-center gap-1 uppercase truncate max-w-[180px]">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#121913] animate-pulse" />
                 &gt; {activeTemplateDef.name}
               </span>
               <span className="font-terminal font-bold text-[#121913]/70">{metadata.badgeId}</span>
             </div>
 
             {/* Dynamic Element Stream */}
-            <div className="flex-1 space-y-1.5 overflow-hidden flex flex-col justify-between py-1">
+            <div className="flex-1 space-y-1 overflow-hidden flex flex-col justify-between py-0.5">
               {display.elements && display.elements.length > 0 ? (
                 display.elements.slice(0, 5).map(renderElement)
               ) : (
-                <div className="text-center py-6 text-xs font-terminal text-[#121913]/60">
+                <div className="text-center py-4 text-xs font-terminal text-[#121913]/60">
                   No display elements added.
                 </div>
               )}
@@ -335,14 +332,14 @@ export const BadgeCard: React.FC<BadgeCardProps> = ({
             )}
 
             {/* Screen Footer Bar */}
-            <div className="border-t border-[#121913]/20 pt-1 text-[10px] font-terminal flex justify-between text-[#121913]/70 uppercase shrink-0">
+            <div className="border-t border-[#121913]/20 pt-0.5 text-[8px] sm:text-[9px] font-terminal flex justify-between text-[#121913]/70 uppercase shrink-0">
               <span>E-PAPER LCD 240x320</span>
               <span>HH26 VERIFIED</span>
             </div>
           </div>
 
           {/* 3 SMALL ACTION BUTTONS POSITIONED FLUSH ABOVE HOT PINK TAGLINE */}
-          <div className="absolute top-[84.6%] left-[5.5%] w-[89%] h-[5.8%] grid grid-cols-3 gap-2.5 z-10">
+          <div className="absolute top-[82.5%] left-[5.5%] w-[89%] h-[5.0%] grid grid-cols-3 gap-1.5 sm:gap-2.5 z-10">
             {(['button1', 'button2', 'button3'] as const).map((bKey) => {
               const btnConfig = buttons[bKey];
               const isActive = buttons.activeButtonId === bKey;
@@ -351,13 +348,13 @@ export const BadgeCard: React.FC<BadgeCardProps> = ({
                 <button
                   key={bKey}
                   onClick={() => onButtonClick?.(bKey)}
-                  className={`w-full h-full py-1 rounded-lg font-terminal text-[10px] sm:text-xs font-black border-2 transition-all flex items-center justify-center gap-1 shadow-md uppercase tracking-wider cursor-pointer ${
+                  className={`w-full h-full py-0.5 rounded-lg font-terminal text-[9px] sm:text-xs font-black border-2 transition-all flex items-center justify-center gap-0.5 sm:gap-1 shadow-md uppercase tracking-wider cursor-pointer ${
                     isActive
                       ? 'bg-[#E5F552] text-[#0A1D13] border-[#0A1D13] scale-[1.02]'
                       : 'bg-white text-[#0A1D13] border-[#0A1D13] hover:bg-[#E5F552]'
                   }`}
                 >
-                  {bKey === 'button1' ? <User className="w-3.5 h-3.5" /> : bKey === 'button2' ? <Code className="w-3.5 h-3.5" /> : <LinkIcon className="w-3.5 h-3.5" />}
+                  {bKey === 'button1' ? <User className="w-3 h-3 sm:w-3.5 sm:h-3.5" /> : bKey === 'button2' ? <Code className="w-3 h-3 sm:w-3.5 sm:h-3.5" /> : <LinkIcon className="w-3 h-3 sm:w-3.5 sm:h-3.5" />}
                   {btnConfig.label}
                 </button>
               );
