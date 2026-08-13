@@ -9,12 +9,11 @@ import { PfpFrameStudio } from './components/PfpFrameStudio';
 import { BadgeCard } from './components/BadgeCard';
 import { ExportModal } from './components/ExportModal';
 import { exportBadgeAsPng } from './utils/exportBadge';
-import { Sparkles, User, Sliders, Palmtree, UserCheck, CreditCard } from 'lucide-react';
+import { Palmtree, UserCheck, CreditCard } from 'lucide-react';
 
 export default function App() {
   const [stage, setStage] = useState<'landing' | 'profile' | 'studio' | 'pfp_frame'>('landing');
   const [cardState, setCardState] = useState<BuilderCardState>(INITIAL_CARD_STATE);
-  const [isExporting, setIsExporting] = useState<boolean>(false);
   const [exportedPng, setExportedPng] = useState<string | null>(null);
   const [isExportModalOpen, setIsExportModalOpen] = useState<boolean>(false);
   const [isFlipped, setIsFlipped] = useState<boolean>(false);
@@ -25,15 +24,12 @@ export default function App() {
 
   const handleShipCard = async () => {
     try {
-      setIsExporting(true);
       const dataUrl = await exportBadgeAsPng('hh-badge-canvas-container', cardState.profile.name || 'Builder');
       setExportedPng(dataUrl);
       setIsExportModalOpen(true);
     } catch (e) {
       console.error('Error generating card image:', e);
       alert('Unable to generate image export. Please try again.');
-    } finally {
-      setIsExporting(false);
     }
   };
 
@@ -67,182 +63,122 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#0A1D13] text-[#F3F0E6] flex flex-col font-body antialiased">
       {/* Top Navbar */}
-      <header className="sticky top-0 z-40 bg-[#0A1D13]/90 backdrop-blur-md border-b border-[#1B422B] px-4 py-3">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
+      <header className="sticky top-0 z-40 bg-[#0A1D13]/95 backdrop-blur-md border-b border-[#1B422B] px-3 sm:px-4 py-2 sm:py-2.5">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
+          {/* Brand Logo */}
           <div
             onClick={() => setStage('landing')}
-            className="flex items-center gap-2.5 cursor-pointer group"
+            className="flex items-center gap-2 cursor-pointer group shrink-0"
           >
             <div className="w-8 h-8 rounded-xl bg-[#163824] border border-[#E5F552]/40 flex items-center justify-center text-[#E5F552] font-display font-black text-sm group-hover:bg-[#E5F552] group-hover:text-[#0A1D13] transition-all shadow-md">
               <Palmtree className="w-4 h-4" />
             </div>
             <div>
-              <span className="font-display font-black text-base tracking-tight text-[#E5F552] leading-none block">
+              <span className="font-display font-black text-sm sm:text-base tracking-tight text-[#E5F552] leading-none block whitespace-nowrap">
                 HH GOA <span className="text-[#FF5E97]">2026</span>
               </span>
-              <span className="font-terminal text-[9px] text-stone-400 uppercase tracking-widest block mt-0.5">
-                BUILDER IDENTITY STUDIO
+              <span className="font-terminal text-[8px] sm:text-[9px] text-stone-400 uppercase tracking-widest hidden xs:block sm:block mt-0.5 whitespace-nowrap">
+                IDENTITY STUDIO
               </span>
             </div>
           </div>
 
-          {/* Mode Navigation Switcher */}
+          {/* Mode Navigation Switcher (Responsive for Mobile) */}
           {stage !== 'landing' && (
-            <div className="flex items-center gap-1.5 bg-[#0D2818] p-1 rounded-2xl border border-[#1B422B]">
+            <div className="flex items-center gap-1 bg-[#0D2818] p-1 rounded-xl sm:rounded-2xl border border-[#1B422B] shrink-0">
               <button
                 onClick={() => setStage('pfp_frame')}
-                className={`px-3 py-1.5 rounded-xl font-terminal text-xs transition-all flex items-center gap-1.5 uppercase ${
+                className={`px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg sm:rounded-xl font-terminal text-[10px] sm:text-xs transition-all flex items-center gap-1 uppercase whitespace-nowrap ${
                   stage === 'pfp_frame'
                     ? 'bg-[#FF5E97] text-white font-bold shadow-sm'
                     : 'text-stone-300 hover:text-white'
                 }`}
               >
-                <UserCheck className="w-3.5 h-3.5" /> FORMAT A: 𝕏 PFP
+                <UserCheck className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                <span>FORMAT A: 𝕏 PFP</span>
               </button>
               <button
                 onClick={() => setStage('profile')}
-                className={`px-3 py-1.5 rounded-xl font-terminal text-xs transition-all flex items-center gap-1.5 uppercase ${
+                className={`px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg sm:rounded-xl font-terminal text-[10px] sm:text-xs transition-all flex items-center gap-1 uppercase whitespace-nowrap ${
                   stage === 'profile' || stage === 'studio'
                     ? 'bg-[#E5F552] text-[#0A1D13] font-bold shadow-sm'
                     : 'text-stone-300 hover:text-white'
                 }`}
               >
-                <CreditCard className="w-3.5 h-3.5" /> FORMAT B: ID CARD
+                <CreditCard className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                <span>FORMAT B: ID CARD</span>
               </button>
             </div>
-          )}
-
-          {stage !== 'landing' && stage !== 'pfp_frame' && (
-            <button
-              onClick={handleShipCard}
-              disabled={isExporting}
-              className="px-4 py-2 rounded-xl bg-[#E5F552] text-[#0A1D13] font-display font-black text-xs sm:text-sm flex items-center gap-1.5 hover:bg-[#F1FB46] active:scale-95 transition-all shadow-lg uppercase"
-            >
-              <Sparkles className="w-4 h-4 fill-current" />
-              {isExporting ? 'EXPORTING...' : 'SHIP MY CARD ⚡'}
-            </button>
           )}
         </div>
       </header>
 
-      {/* Main Body Stage Router */}
-      <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 md:p-8">
-        {stage === 'landing' ? (
+      {/* Main Content View Stage */}
+      <main className="flex-1 w-full max-w-7xl mx-auto px-4 py-6">
+        {stage === 'landing' && (
           <LandingPage
             onStartIdCard={() => setStage('profile')}
             onStartPfpFrame={() => setStage('pfp_frame')}
           />
-        ) : stage === 'pfp_frame' ? (
+        )}
+
+        {stage === 'pfp_frame' && (
           <PfpFrameStudio
             cardState={cardState}
             onUpdateState={handleUpdateCardState}
           />
-        ) : (
+        )}
+
+        {stage === 'profile' && (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            {/* Left Controls Column */}
-            <div className="lg:col-span-7 space-y-6">
-              {/* Mobile Stage Switcher */}
-              <div className="sm:hidden flex bg-[#0D2818] p-1 rounded-xl border border-[#1B422B] mb-4">
-                <button
-                  onClick={() => setStage('profile')}
-                  className={`flex-1 py-2 text-center font-terminal text-xs rounded-lg ${
-                    stage === 'profile' ? 'bg-[#E5F552] text-[#0A1D13] font-bold' : 'text-stone-300'
-                  }`}
-                >
-                  1. PROFILE
-                </button>
-                <button
-                  onClick={() => setStage('studio')}
-                  className={`flex-1 py-2 text-center font-terminal text-xs rounded-lg ${
-                    stage === 'studio' ? 'bg-[#E5F552] text-[#0A1D13] font-bold' : 'text-stone-300'
-                  }`}
-                >
-                  2. DISPLAY STUDIO
-                </button>
-              </div>
-
-              {/* Desktop Sub-Stage Tabs for ID Card */}
-              <div className="hidden sm:flex items-center gap-2 bg-[#0D2818] p-1 rounded-2xl border border-[#1B422B] w-fit">
-                <button
-                  onClick={() => setStage('profile')}
-                  className={`px-4 py-1.5 rounded-xl font-terminal text-xs transition-all flex items-center gap-1.5 ${
-                    stage === 'profile'
-                      ? 'bg-[#E5F552] text-[#0A1D13] font-bold shadow-sm'
-                      : 'text-stone-300 hover:text-white'
-                  }`}
-                >
-                  <User className="w-3.5 h-3.5" /> 1. BUILD PROFILE
-                </button>
-                <button
-                  onClick={() => setStage('studio')}
-                  className={`px-4 py-1.5 rounded-xl font-terminal text-xs transition-all flex items-center gap-1.5 ${
-                    stage === 'studio'
-                      ? 'bg-[#E5F552] text-[#0A1D13] font-bold shadow-sm'
-                      : 'text-stone-300 hover:text-white'
-                  }`}
-                >
-                  <Sliders className="w-3.5 h-3.5" /> 2. DESIGN DISPLAY STUDIO
-                </button>
-              </div>
-
-              {stage === 'profile' ? (
-                <ProfileForm
-                  cardState={cardState}
-                  onUpdateState={handleUpdateCardState}
-                  onProceedToStudio={() => setStage('studio')}
-                />
-              ) : (
-                <DisplayStudio
-                  cardState={cardState}
-                  onUpdateState={handleUpdateCardState}
-                  onProceedToShip={handleShipCard}
-                />
-              )}
+            <div className="lg:col-span-6 space-y-6">
+              <ProfileForm
+                cardState={cardState}
+                onUpdateState={handleUpdateCardState}
+                onProceedToStudio={() => setStage('studio')}
+              />
             </div>
+            <div className="lg:col-span-6 lg:sticky lg:top-24 space-y-4">
+              <BadgeCard
+                cardState={cardState}
+                onButtonClick={handleButtonClick}
+                isFlipped={isFlipped}
+                onToggleFlip={setIsFlipped}
+              />
+            </div>
+          </div>
+        )}
 
-            {/* Right Live Preview Column */}
-            <div className="lg:col-span-5 sticky top-24 space-y-4">
-              <div className="text-center sm:text-left flex items-center justify-between">
-                <div>
-                  <h3 className="font-display font-black text-base text-[#F3F0E6] uppercase tracking-wider flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-[#E5F552] animate-ping" />
-                    LIVE BADGE CANVAS PREVIEW
-                  </h3>
-                  <p className="font-terminal text-xs text-stone-400">
-                    Interactive Physical Card (Click A, B, C or flip)
-                  </p>
-                </div>
-
-                <button
-                  onClick={() => setIsFlipped(!isFlipped)}
-                  className="px-3 py-1.5 rounded-xl bg-[#163824] border border-[#E5F552]/40 text-[#E5F552] font-terminal text-xs font-bold hover:bg-[#E5F552] hover:text-[#0A1D13] transition-all shadow-md uppercase"
-                >
-                  {isFlipped ? 'SEE FRONT ▲' : 'FLIP TO BACK ▼'}
-                </button>
-              </div>
-
-              <div className="flex justify-center">
-                <BadgeCard
-                  cardState={cardState}
-                  onButtonClick={handleButtonClick}
-                  isFlipped={isFlipped}
-                  onToggleFlip={setIsFlipped}
-                />
-              </div>
+        {stage === 'studio' && (
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <div className="lg:col-span-6 space-y-6">
+              <DisplayStudio
+                cardState={cardState}
+                onUpdateState={handleUpdateCardState}
+                onProceedToShip={handleShipCard}
+              />
+            </div>
+            <div className="lg:col-span-6 lg:sticky lg:top-24 space-y-4">
+              <BadgeCard
+                cardState={cardState}
+                onButtonClick={handleButtonClick}
+                isFlipped={isFlipped}
+                onToggleFlip={setIsFlipped}
+              />
             </div>
           </div>
         )}
       </main>
 
-      {/* Export Modal */}
+      {/* Export Output Modal */}
       {isExportModalOpen && exportedPng && (
         <ExportModal
           isOpen={isExportModalOpen}
           onClose={() => setIsExportModalOpen(false)}
           pngDataUrl={exportedPng}
+          cardState={cardState}
           builderName={cardState.profile.name || 'Builder'}
           builderTitle={cardState.builderTitle}
-          cardState={cardState}
           onButtonClick={handleButtonClick}
           onToggleFlip={setIsFlipped}
         />
