@@ -73,32 +73,32 @@ export const BadgeCard: React.FC<BadgeCardProps> = ({
     switch (elem.type) {
       case 'profile':
         return (
-          <div key={elem.id} className="flex gap-2.5 items-center shrink-0">
+          <div key={elem.id} className="flex gap-3 items-center shrink-0">
             {profile.photoUrl ? (
               <img
                 src={profile.photoUrl}
                 alt={profile.name}
-                className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl object-cover border-2 border-[#121913] shadow-md shrink-0"
+                className="w-14 h-14 rounded-xl object-cover border-2 border-[#121913] shadow-md shrink-0"
               />
             ) : (
-              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-[#121913]/10 border-2 border-[#121913] flex items-center justify-center shrink-0">
+              <div className="w-14 h-14 rounded-xl bg-[#121913]/10 border-2 border-[#121913] flex items-center justify-center shrink-0">
                 <Terminal className="w-6 h-6 text-[#121913]" />
               </div>
             )}
             <div className="flex-1 min-w-0">
-              <h3 className="text-xl sm:text-2xl font-display font-black leading-none uppercase tracking-tight text-[#121913] truncate">
+              <h3 className="text-2xl font-display font-black leading-none uppercase tracking-tight text-[#121913] truncate">
                 {profile.name || 'ANONYMOUS BUILDER'}
               </h3>
-              <p className="text-[10px] sm:text-xs font-terminal font-semibold text-[#121913]/75 truncate mt-0.5">
+              <p className="text-xs font-terminal font-semibold text-[#121913]/75 truncate mt-0.5">
                 {profile.handle || '@builder'}
               </p>
-              <div className="flex items-center gap-1 mt-0.5">
-                <span className="inline-block px-1.5 py-0.5 rounded bg-[#121913] text-[#D8DFC6] text-[9px] sm:text-[10px] font-terminal font-bold uppercase tracking-wider">
+              <div className="flex items-center gap-1.5 mt-1">
+                <span className="inline-block px-1.5 py-0.5 rounded bg-[#121913] text-[#D8DFC6] text-[10px] font-terminal font-bold uppercase tracking-wider">
                   {profile.role || 'BUILDER'}
                 </span>
                 {profile.location && (
-                  <span className="text-[9px] sm:text-[10px] font-terminal text-[#121913]/80 flex items-center gap-0.5 truncate font-medium uppercase">
-                    <MapPin className="w-3 h-3 text-[#121913]/70 shrink-0" /> {profile.location}
+                  <span className="text-[10px] font-terminal text-[#121913]/80 flex items-center gap-0.5 truncate font-medium uppercase">
+                    <MapPin className="w-3.5 h-3.5 text-[#121913]/70 shrink-0" /> {profile.location}
                   </span>
                 )}
               </div>
@@ -108,11 +108,11 @@ export const BadgeCard: React.FC<BadgeCardProps> = ({
 
       case 'title':
         return (
-          <div key={elem.id} className="py-1 px-2 sm:py-1.5 sm:px-2.5 bg-[#121913]/5 border border-[#121913]/25 rounded-xl text-center shadow-inner shrink-0">
-            <p className="text-[8px] sm:text-[9px] font-terminal uppercase tracking-widest text-[#121913]/60 font-bold">
+          <div key={elem.id} className="py-1.5 px-3 bg-[#121913]/5 border border-[#121913]/25 rounded-xl text-center shadow-inner shrink-0">
+            <p className="text-[9px] font-terminal uppercase tracking-widest text-[#121913]/60 font-bold">
               BUILDER TITLE
             </p>
-            <h4 className="text-base sm:text-xl font-display font-black tracking-wide text-[#121913] uppercase leading-none mt-0.5 truncate">
+            <h4 className="text-xl font-display font-black tracking-wide text-[#121913] uppercase leading-none mt-0.5 truncate">
               ⚡ {builderTitle}
             </h4>
           </div>
@@ -121,21 +121,21 @@ export const BadgeCard: React.FC<BadgeCardProps> = ({
       case 'stack':
         return (
           <div key={elem.id} className="shrink-0">
-            <p className="text-[8px] sm:text-[9px] font-terminal font-bold uppercase tracking-wider text-[#121913]/60 mb-0.5">
+            <p className="text-[9px] font-terminal font-bold uppercase tracking-wider text-[#121913]/60 mb-1">
               STACK
             </p>
-            <div className="flex flex-wrap gap-1">
+            <div className="flex flex-wrap gap-1.5">
               {profile.stack && profile.stack.length > 0 ? (
-                profile.stack.slice(0, 4).map((tech, idx) => (
+                profile.stack.map((tech, idx) => (
                   <span
                     key={idx}
-                    className="px-1.5 py-0.5 bg-[#121913]/10 border border-[#121913]/30 rounded text-[9px] sm:text-[10px] font-terminal font-bold text-[#121913] uppercase"
+                    className="px-2 py-0.5 bg-[#121913]/10 border border-[#121913]/30 rounded-md text-[10px] font-terminal font-bold text-[#121913] uppercase"
                   >
                     {tech}
                   </span>
                 ))
               ) : (
-                <span className="text-[10px] font-terminal text-stone-600">PYTHON · REACT · AI</span>
+                <span className="text-xs font-terminal text-stone-600">PYTHON · REACT · AI</span>
               )}
             </div>
           </div>
@@ -143,8 +143,8 @@ export const BadgeCard: React.FC<BadgeCardProps> = ({
 
       case 'quote':
         return (
-          <div key={elem.id} className="p-1.5 italic text-center border-l-2 border-[#121913] bg-[#121913]/5 rounded-r shrink-0">
-            <p className="text-[10px] sm:text-xs font-body font-medium text-[#121913] line-clamp-2">
+          <div key={elem.id} className="p-2 italic text-center border-l-2 border-[#121913] bg-[#121913]/5 rounded-r shrink-0">
+            <p className="text-xs font-body font-medium text-[#121913] line-clamp-2">
               {profile.quote || '"Ship first. Explain later."'}
             </p>
           </div>
@@ -152,10 +152,10 @@ export const BadgeCard: React.FC<BadgeCardProps> = ({
 
       case 'status':
         return (
-          <div key={elem.id} className="p-1.5 border border-[#121913]/35 rounded-xl bg-[#121913]/5 flex flex-col gap-1 shrink-0">
-            <div className="flex justify-between items-center text-[10px] sm:text-xs font-terminal font-bold text-[#121913] uppercase">
+          <div key={elem.id} className="p-2 border border-[#121913]/35 rounded-xl bg-[#121913]/5 flex flex-col gap-1 shrink-0">
+            <div className="flex justify-between items-center text-xs font-terminal font-bold text-[#121913] uppercase">
               <span className="truncate">{profile.statusMessage || 'STATUS: SHIPPING'}</span>
-              <span className="flex items-center gap-1 shrink-0"><Coffee className="w-3 h-3 text-[#121913]" /> {profile.coffeeCount} COFFEES</span>
+              <span className="flex items-center gap-1 shrink-0"><Coffee className="w-3.5 h-3.5 text-[#121913]" /> {profile.coffeeCount} COFFEES</span>
             </div>
             <div className="w-full bg-[#121913]/20 h-2 rounded-full overflow-hidden p-0.5">
               <div className="bg-[#121913] h-full rounded-full w-[82%]" />
@@ -165,54 +165,54 @@ export const BadgeCard: React.FC<BadgeCardProps> = ({
 
       case 'stats':
         return (
-          <div key={elem.id} className="border border-[#121913]/30 rounded-xl bg-[#121913]/5 p-1.5 grid grid-cols-4 divide-x divide-[#121913]/20 text-center shrink-0">
+          <div key={elem.id} className="border border-[#121913]/30 rounded-xl bg-[#121913]/5 p-2 grid grid-cols-4 divide-x divide-[#121913]/20 text-center shrink-0">
             <div className="px-0.5">
               <div className="flex items-center justify-center text-[#121913]">
-                <Code className="w-3.5 h-3.5" />
+                <Code className="w-4 h-4" />
               </div>
-              <p className="text-[8px] font-terminal font-bold text-[#121913]/70 mt-0.5">PROJECTS</p>
-              <p className="text-xs font-bold font-terminal text-[#121913]">{profile.stats.projects}</p>
+              <p className="text-[9px] font-terminal font-bold text-[#121913]/70 mt-0.5">PROJECTS</p>
+              <p className="text-sm font-bold font-terminal text-[#121913]">{profile.stats.projects}</p>
             </div>
             <div className="px-0.5">
               <div className="flex items-center justify-center text-[#121913]">
-                <Trophy className="w-3.5 h-3.5" />
+                <Trophy className="w-4 h-4" />
               </div>
-              <p className="text-[8px] font-terminal font-bold text-[#121913]/70 mt-0.5">HACKATHONS</p>
-              <p className="text-xs font-bold font-terminal text-[#121913]">{profile.stats.hackathons}</p>
+              <p className="text-[9px] font-terminal font-bold text-[#121913]/70 mt-0.5">HACKATHONS</p>
+              <p className="text-sm font-bold font-terminal text-[#121913]">{profile.stats.hackathons}</p>
             </div>
             <div className="px-0.5">
               <div className="flex items-center justify-center text-[#121913]">
-                <Flame className="w-3.5 h-3.5" />
+                <Flame className="w-4 h-4" />
               </div>
-              <p className="text-[8px] font-terminal font-bold text-[#121913]/70 mt-0.5">STREAK</p>
-              <p className="text-xs font-bold font-terminal text-[#121913]">{profile.stats.streak}D</p>
+              <p className="text-[9px] font-terminal font-bold text-[#121913]/70 mt-0.5">STREAK</p>
+              <p className="text-sm font-bold font-terminal text-[#121913]">{profile.stats.streak}D</p>
             </div>
             <div className="px-0.5">
               <div className="flex items-center justify-center text-[#121913]">
-                <Award className="w-3.5 h-3.5" />
+                <Award className="w-4 h-4" />
               </div>
-              <p className="text-[8px] font-terminal font-bold text-[#121913]/70 mt-0.5">RANK</p>
-              <p className="text-xs font-bold font-terminal text-[#121913]">{profile.stats.rank}</p>
+              <p className="text-[9px] font-terminal font-bold text-[#121913]/70 mt-0.5">RANK</p>
+              <p className="text-sm font-bold font-terminal text-[#121913]">{profile.stats.rank}</p>
             </div>
           </div>
         );
 
       case 'qr':
         return (
-          <div key={elem.id} className="p-2 bg-[#121913]/10 border border-[#121913]/30 rounded-xl flex items-center justify-between shadow-sm shrink-0">
-            <div className="space-y-0.5 min-w-0 pr-1.5">
-              <div className="flex items-center gap-1 text-[#121913] font-terminal font-bold text-[10px] sm:text-xs uppercase">
-                <QrCode className="w-3.5 h-3.5" /> SCAN TO CONNECT
+          <div key={elem.id} className="p-2.5 bg-[#121913]/10 border border-[#121913]/30 rounded-xl flex items-center justify-between shadow-sm shrink-0">
+            <div className="space-y-1 min-w-0 pr-2">
+              <div className="flex items-center gap-1 text-[#121913] font-terminal font-bold text-xs uppercase">
+                <QrCode className="w-4 h-4" /> SCAN TO CONNECT
               </div>
-              <p className="text-[10px] sm:text-xs font-terminal text-[#121913]/80 font-semibold truncate max-w-[160px]">
+              <p className="text-xs font-terminal text-[#121913]/80 font-semibold truncate max-w-[170px]">
                 {profile.github || profile.website || 'github.com/builder'}
               </p>
-              <span className="inline-block text-[9px] font-terminal text-[#121913]/60 uppercase">
+              <span className="inline-block text-[10px] font-terminal text-[#121913]/60 uppercase">
                 OFFICIAL BUILDER QR
               </span>
             </div>
             <div className="p-1 bg-white rounded-lg border border-[#121913] shadow shrink-0">
-              <QRCodeSVG value={profile.github || profile.website || 'https://hhgoa.dev'} size={54} />
+              <QRCodeSVG value={profile.github || profile.website || 'https://hhgoa.dev'} size={58} />
             </div>
           </div>
         );
@@ -236,13 +236,13 @@ export const BadgeCard: React.FC<BadgeCardProps> = ({
       case 'text':
       case 'custom':
         return (
-          <div key={elem.id} className="p-1.5 border border-dashed border-[#121913]/40 rounded-lg bg-[#121913]/5 shrink-0">
+          <div key={elem.id} className="p-2 border border-dashed border-[#121913]/40 rounded-lg bg-[#121913]/5 shrink-0">
             {elem.label && (
-              <p className="text-[8px] font-terminal font-bold text-[#121913]/60 uppercase mb-0.5">
+              <p className="text-[9px] font-terminal font-bold text-[#121913]/60 uppercase mb-0.5">
                 {elem.label}
               </p>
             )}
-            <p className={`text-[10px] sm:text-xs font-terminal font-medium text-[#121913] ${getFontClass(elem.style.font || display.font)}`}>
+            <p className={`text-xs font-terminal font-medium text-[#121913] ${getFontClass(elem.style.font || display.font)}`}>
               {elem.content || 'Building things nobody asked for.'}
             </p>
           </div>
@@ -302,21 +302,21 @@ export const BadgeCard: React.FC<BadgeCardProps> = ({
             className="absolute inset-0 w-full h-full object-cover z-0"
           />
 
-          {/* LARGE SPACIOUS E-PAPER DISPLAY SCREEN BOX */}
+          {/* E-PAPER DISPLAY SCREEN BOX (TIGHT COHESIVE STREAM, NO BIG AWKWARD GAPS) */}
           <div
-            className="absolute top-[31.0%] left-[5.5%] w-[89%] h-[50.5%] bg-[#D8DFC6] epaper-texture text-[#121913] rounded-2xl border-4 border-[#0d2216] epaper-screen-shadow p-2.5 sm:p-3 flex flex-col justify-between overflow-hidden shadow-2xl z-10"
+            className="absolute top-[31.0%] left-[5.5%] w-[89%] h-[50.5%] bg-[#D8DFC6] epaper-texture text-[#121913] rounded-2xl border-4 border-[#0d2216] epaper-screen-shadow p-3 flex flex-col justify-between overflow-hidden shadow-2xl z-10"
           >
             {/* Screen Header Bar */}
-            <div className="flex justify-between items-center text-[10px] sm:text-xs font-terminal font-bold border-b border-[#121913]/25 pb-0.5 mb-0.5 text-[#121913] shrink-0">
-              <span className="flex items-center gap-1 uppercase truncate max-w-[180px]">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#121913] animate-pulse" />
+            <div className="flex justify-between items-center text-xs font-terminal font-bold border-b border-[#121913]/25 pb-1 mb-1 text-[#121913] shrink-0">
+              <span className="flex items-center gap-1.5 uppercase truncate max-w-[200px]">
+                <span className="w-2 h-2 rounded-full bg-[#121913] animate-pulse" />
                 &gt; {activeTemplateDef.name}
               </span>
               <span className="font-terminal font-bold text-[#121913]/70">{metadata.badgeId}</span>
             </div>
 
-            {/* Dynamic Element Stream */}
-            <div className="flex-1 space-y-1 overflow-hidden flex flex-col justify-between py-0.5">
+            {/* Dynamic Element Stream (Natural Top-to-Bottom Flow with Tight Gaps) */}
+            <div className="flex-1 space-y-2 overflow-y-auto flex flex-col justify-start py-1 pr-0.5 custom-scrollbar">
               {display.elements && display.elements.length > 0 ? (
                 display.elements.slice(0, 5).map(renderElement)
               ) : (
@@ -332,7 +332,7 @@ export const BadgeCard: React.FC<BadgeCardProps> = ({
             )}
 
             {/* Screen Footer Bar */}
-            <div className="border-t border-[#121913]/20 pt-0.5 text-[8px] sm:text-[9px] font-terminal flex justify-between text-[#121913]/70 uppercase shrink-0">
+            <div className="border-t border-[#121913]/20 pt-1 text-[9px] font-terminal flex justify-between text-[#121913]/70 uppercase shrink-0 mt-1">
               <span>E-PAPER LCD 240x320</span>
               <span>HH26 VERIFIED</span>
             </div>
