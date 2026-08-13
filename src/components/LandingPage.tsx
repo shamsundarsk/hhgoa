@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Sparkles, ShieldCheck, Palmtree, UserCheck, CreditCard, Flame, Award, Heart, Crop, Sliders, Download } from 'lucide-react';
+import { ArrowRight, Sparkles, ShieldCheck, Palmtree, UserCheck, CreditCard, Flame, Award, Crop, Sliders, Download } from 'lucide-react';
 
 interface LandingPageProps {
   onStartIdCard: () => void;
@@ -151,9 +151,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartIdCard, onStart
       </section>
 
       {/* ========================================================================= */}
-      {/* SECTION 2: RESTORED FULL FOOTER (VALUE PROPS + COCONUT TREES + TEAM PORYGON)*/}
+      {/* SECTION 2: FOOTER FEATURE CARDS OVER GOA COCONUT TREES BACKGROUND          */}
       {/* ========================================================================= */}
-      <footer className="relative border-t-2 border-[#163824] overflow-hidden text-center mt-6">
+      <footer className="relative border-t-2 border-[#163824] overflow-hidden text-center mt-4">
         {/* Background Image: Goa Coconut Trees Overlay */}
         <div className="absolute inset-0 z-0">
           <img
@@ -164,9 +164,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartIdCard, onStart
           <div className="absolute inset-0 bg-gradient-to-t from-[#0A1D13] via-[#0A1D13]/90 to-transparent"></div>
         </div>
 
-        {/* Footer Content */}
-        <div className="relative z-10 max-w-5xl mx-auto px-4 py-8 space-y-6">
-          {/* Restored 3 Value Props Bar */}
+        {/* Footer Content: 3 Feature Cards */}
+        <div className="relative z-10 max-w-5xl mx-auto px-4 py-6">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
             <div className="p-3.5 rounded-2xl bg-[#0D2818]/80 border border-[#1B422B] backdrop-blur-md shadow-lg space-y-1">
               <div className="flex items-center gap-2 text-[#E5F552]">
@@ -190,27 +189,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartIdCard, onStart
                 <p className="font-terminal font-bold text-xs uppercase tracking-wider">HIGH-DPI PNG & 𝕏</p>
               </div>
               <p className="font-body text-[11px] text-stone-400">Instant PNG export & #FrameInGoa</p>
-            </div>
-          </div>
-
-          {/* Team Porygon Credits & Links */}
-          <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-[#1B422B]">
-            <div className="flex items-center gap-1.5 font-display font-black text-lg sm:text-xl text-[#E5F552] uppercase tracking-wider">
-              MADE WITH <Heart className="w-5 h-5 text-[#FF5E97] fill-current inline-block animate-bounce" /> BY TEAM PORYGON
-            </div>
-
-            <p className="font-terminal text-xs text-stone-400 uppercase tracking-widest">
-              HACKER HOUSE GOA 2026 OFFICIAL EVENT SUBMISSION · TASK 1
-            </p>
-
-            <div className="flex items-center gap-3 text-xs font-terminal text-[#E5F552]">
-              <a href="https://hhgoa.com" target="_blank" rel="noopener noreferrer" className="hover:underline">
-                HHGOA.COM
-              </a>
-              <span>·</span>
-              <a href="https://github.com/shamsundarsk/hhgoa" target="_blank" rel="noopener noreferrer" className="hover:underline">
-                GITHUB REPO
-              </a>
             </div>
           </div>
         </div>
