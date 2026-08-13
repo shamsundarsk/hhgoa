@@ -174,7 +174,7 @@ function renderElementsToHtml(
       case 'status':
         return `
           <div style="padding: 6px; border: 1px solid rgba(18,25,19,0.25); border-radius: 8px; background: rgba(18,25,19,0.05);">
-            <div style="display: flex; justify-content: space-between; font-family: 'IBM Plex Mono'; font-size: 10px; font-weight: 700; text-transform: uppercase; margin-bottom: 4px;">
+            <div style="display: flex; justify-between: space-between; font-family: 'IBM Plex Mono'; font-size: 10px; font-weight: 700; text-transform: uppercase; margin-bottom: 4px;">
               <span>${profile.statusMessage || 'STATUS: SHIPPING'}</span>
               <span style="display: flex; align-items: center; gap: 4px;"><svg style="width: 12px; height: 12px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg> ${profile.coffeeCount} COFFEES</span>
             </div>
@@ -332,37 +332,23 @@ export async function exportStandaloneHtmlBadge(cardState: BuilderCardState): Pr
       color: #888888;
       letter-spacing: 2px;
       text-transform: uppercase;
-      margin-bottom: 24px;
-    }
-    .badge-card {
-      position: relative;
-      width: 100%;
-      max-width: 500px;
-      aspect-ratio: 1 / 1.5;
-      border-radius: 2.5rem;
-      overflow: hidden;
-      border: 4px solid #163824;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
-      background-color: #0d2818;
-    }
-    .badge-bg {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: 0;
+      margin-bottom: 20px;
     }
 
-    /* Top Lanyard Strap & Clip Assembly */
-    .lanyard-wrapper {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
+    /* Outer Wrapper Positioning Top Lanyard Strap ABOVE Card Box */
+    .badge-wrapper {
       display: flex;
       flex-direction: column;
       align-items: center;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .lanyard-assembly {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: -12px;
       z-index: 30;
       pointer-events: none;
     }
@@ -423,20 +409,39 @@ export async function exportStandaloneHtmlBadge(cardState: BuilderCardState): Pr
       border: 1px solid #57534e;
     }
 
+    .badge-card {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1.5;
+      border-radius: 2.5rem;
+      overflow: hidden;
+      border: 4px solid #163824;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+      background-color: #0d2818;
+    }
+    .badge-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
     /* E-paper Screen Box with Dot-Matrix Texture */
     .epaper-screen {
       position: absolute;
-      top: 31.2%;
+      top: 31.0%;
       left: 5.5%;
       width: 89%;
-      height: 52%;
+      height: 50.5%;
       background-color: #D8DFC6;
       background-image: radial-gradient(rgba(18, 25, 19, 0.18) 1px, transparent 1px);
       background-size: 6px 6px;
       color: #121913;
       border-radius: 1.25rem;
       border: 4px solid #0d2216;
-      padding: 14px;
+      padding: 12px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -472,8 +477,9 @@ export async function exportStandaloneHtmlBadge(cardState: BuilderCardState): Pr
       flex: 1;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      padding: 6px 0;
+      justify-content: flex-start;
+      padding: 4px 0;
+      overflow-y: auto;
     }
     .screen-footer {
       border-top: 1px solid rgba(18, 25, 19, 0.2);
@@ -487,13 +493,13 @@ export async function exportStandaloneHtmlBadge(cardState: BuilderCardState): Pr
     }
     .buttons-bar {
       position: absolute;
-      top: 84.6%;
+      top: 82.5%;
       left: 5.5%;
       width: 89%;
-      height: 5.8%;
+      height: 5.0%;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
+      gap: 8px;
       z-index: 10;
     }
     .action-btn {
@@ -557,11 +563,10 @@ export async function exportStandaloneHtmlBadge(cardState: BuilderCardState): Pr
     <p class="header-sub">STANDALONE INTERACTIVE HTML BADGE</p>
   </div>
 
-  <div class="badge-card" id="badge">
-    <img src="${bgBase64}" class="badge-bg" alt="HH Goa Card Template">
-
-    <!-- Top Green Lanyard Strap & Swivel Ring Clip -->
-    <div class="lanyard-wrapper">
+  <!-- Outer Lanyard & Card Wrapper -->
+  <div class="badge-wrapper">
+    <!-- Top Green Lanyard Strap & Swivel Ring Clip (POSITIONED OUTSIDE CARD) -->
+    <div class="lanyard-assembly">
       <div class="lanyard-strap">
         <span>HACKER HOUSE GOA 2026 🌴</span>
       </div>
@@ -573,58 +578,64 @@ export async function exportStandaloneHtmlBadge(cardState: BuilderCardState): Pr
       </div>
     </div>
 
-    <!-- Spacious E-paper Screen Box -->
-    <div class="epaper-screen">
-      <div class="screen-header">
-        <span id="screen-mode"><span class="pulsing-led"></span>&gt; ${initialMode}</span>
-        <span>${metadata.badgeId}</span>
+    <!-- Official ID Card Frame -->
+    <div class="badge-card" id="badge">
+      <img src="${bgBase64}" class="badge-bg" alt="HH Goa Card Template">
+
+      <!-- Spacious E-paper Screen Box -->
+      <div class="epaper-screen">
+        <div class="screen-header">
+          <span id="screen-mode"><span class="pulsing-led"></span>&gt; ${initialMode}</span>
+          <span>${metadata.badgeId}</span>
+        </div>
+
+        <div class="screen-body" id="screen-content">
+          ${initialHtml}
+        </div>
+
+        <div class="screen-footer">
+          <span>E-PAPER LCD 240x320</span>
+          <span>HH26 VERIFIED</span>
+        </div>
       </div>
 
-      <div class="screen-body" id="screen-content">
-        ${initialHtml}
+      <!-- 3 Action Buttons -->
+      <div class="buttons-bar">
+        <button class="action-btn ${buttons.activeButtonId === 'button1' ? 'active' : ''}" id="btn1" onclick="switchView('button1')">${userSvg} ${buttons.button1.label}</button>
+        <button class="action-btn ${buttons.activeButtonId === 'button2' ? 'active' : ''}" id="btn2" onclick="switchView('button2')">${codeSvg} ${buttons.button2.label}</button>
+        <button class="action-btn ${buttons.activeButtonId === 'button3' ? 'active' : ''}" id="btn3" onclick="switchView('button3')">${linkSvg} ${buttons.button3.label}</button>
       </div>
-
-      <div class="screen-footer">
-        <span>E-PAPER LCD 240x320</span>
-        <span>HH26 VERIFIED</span>
-      </div>
-    </div>
-
-    <div class="buttons-bar">
-      <button class="action-btn ${buttons.activeButtonId === 'button1' ? 'active' : ''}" id="btn1" onclick="switchView('button1')">${userSvg} ${buttons.button1.label}</button>
-      <button class="action-btn ${buttons.activeButtonId === 'button2' ? 'active' : ''}" id="btn2" onclick="switchView('button2')">${codeSvg} ${buttons.button2.label}</button>
-      <button class="action-btn ${buttons.activeButtonId === 'button3' ? 'active' : ''}" id="btn3" onclick="switchView('button3')">${linkSvg} ${buttons.button3.label}</button>
     </div>
   </div>
 
   <script>
     const views = {
-      button1: { mode: ${JSON.stringify(template1Def.name)}, html: ${JSON.stringify(btn1Html)} },
-      button2: { mode: ${JSON.stringify(template2Def.name)}, html: ${JSON.stringify(btn2Html)} },
-      button3: { mode: ${JSON.stringify(template3Def.name)}, html: ${JSON.stringify(btn3Html)} }
+      button1: { html: \`${btn1Html.replace(/`/g, '\\`')}\`, mode: '${template1Def.name}' },
+      button2: { html: \`${btn2Html.replace(/`/g, '\\`')}\`, mode: '${template2Def.name}' },
+      button3: { html: \`${btn3Html.replace(/`/g, '\\`')}\`, mode: '${template3Def.name}' }
     };
 
-    function switchView(btnKey) {
-      document.querySelectorAll('.action-btn').forEach(b => b.classList.remove('active'));
-      const target = views[btnKey];
-      if (target) {
-        if (btnKey === 'button1') document.getElementById('btn1').classList.add('active');
-        if (btnKey === 'button2') document.getElementById('btn2').classList.add('active');
-        if (btnKey === 'button3') document.getElementById('btn3').classList.add('active');
-        document.getElementById('screen-mode').innerHTML = '<span class="pulsing-led"></span>&gt; ' + target.mode;
-        document.getElementById('screen-content').innerHTML = target.html;
-      }
+    function switchView(bKey) {
+      document.getElementById('screen-content').innerHTML = views[bKey].html;
+      document.getElementById('screen-mode').innerHTML = '<span class="pulsing-led"></span>&gt; ' + views[bKey].mode;
+      
+      ['btn1', 'btn2', 'btn3'].forEach(id => {
+        document.getElementById(id).classList.remove('active');
+      });
+      const activeId = bKey === 'button1' ? 'btn1' : bKey === 'button2' ? 'btn2' : 'btn3';
+      document.getElementById(activeId).classList.add('active');
     }
   </script>
 </body>
 </html>`;
 
-  const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
-  const link = document.createElement('a');
-  const safeName = (profile.name || 'Builder').replace(/\s+/g, '_');
-  link.download = `${safeName}_HHGoa2026_InteractiveBadge.html`;
-  link.href = URL.createObjectURL(blob);
-  link.click();
+  const blob = new Blob([htmlContent], { type: 'text/html' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${(profile.name || 'Builder').replace(/\s+/g, '_')}_HHGoa2026_InteractiveBadge.html`;
+  a.click();
+  URL.revokeObjectURL(url);
 
   confetti({
     particleCount: 100,
