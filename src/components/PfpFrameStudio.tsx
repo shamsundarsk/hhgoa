@@ -84,7 +84,11 @@ export const PfpFrameStudio: React.FC<PfpFrameStudioProps> = ({
 
   const currentPhoto = ditherMode === 'COLOR' ? rawPhoto : (pixelatedPhotoUrl || rawPhoto);
 
-  const tweetText = `Built in Goa. Less noise. More signal.\n\nMy official X PFP for Hacker House Goa 2026 🌴\n\n#FrameInGoa`;
+  const name = profile.name || 'Builder';
+  const role = profile.role || 'SHIPPER';
+  const title = builderTitle || 'THE DATA ALCHEMIST';
+
+  const tweetText = `🌴 MY OFFICIAL 𝕏 PFP FOR HACKER HOUSE GOA 2026 🌴\n\n"Less Noise < More Signal"\n\n👤 ${name} (@${profile.handle || 'builder'})\n🏷️ ${role} | "${title}"\n\nTransformed into 8-bit retro pixel art with #FrameInGoa branding! ⚡\n\nClaim your official PFP at https://hhgoa.com\n#HHGoa2026 #HackerHouseGoa #BuildInGoa`;
   const tweetUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(tweetText)}`;
 
   return (
