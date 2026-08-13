@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Sparkles, ShieldCheck, Palmtree, UserCheck, CreditCard, Flame, Award, Crop, Sliders, Download } from 'lucide-react';
+import { ArrowRight, Sparkles, ShieldCheck, Palmtree, UserCheck, CreditCard, Flame, Award, Heart } from 'lucide-react';
 
 interface LandingPageProps {
   onStartIdCard: () => void;
@@ -151,9 +151,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartIdCard, onStart
       </section>
 
       {/* ========================================================================= */}
-      {/* SECTION 2: FOOTER FEATURE CARDS OVER GOA COCONUT TREES BACKGROUND          */}
+      {/* SECTION 2: CLEAN FOOTER (ONLY TEAM PORYGON CREDITS + GOA COCONUT TREES)  */}
       {/* ========================================================================= */}
-      <footer className="relative border-t-2 border-[#163824] overflow-hidden text-center mt-4">
+      <footer className="relative border-t-2 border-[#163824] overflow-hidden text-center mt-4 shrink-0">
         {/* Background Image: Goa Coconut Trees Overlay */}
         <div className="absolute inset-0 z-0">
           <img
@@ -164,32 +164,26 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartIdCard, onStart
           <div className="absolute inset-0 bg-gradient-to-t from-[#0A1D13] via-[#0A1D13]/90 to-transparent"></div>
         </div>
 
-        {/* Footer Content: 3 Feature Cards */}
-        <div className="relative z-10 max-w-5xl mx-auto px-4 py-6">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
-            <div className="p-3.5 rounded-2xl bg-[#0D2818]/80 border border-[#1B422B] backdrop-blur-md shadow-lg space-y-1">
-              <div className="flex items-center gap-2 text-[#E5F552]">
-                <Crop className="w-4 h-4" />
-                <p className="font-terminal font-bold text-xs uppercase tracking-wider">NO CROPPING FRICTION</p>
-              </div>
-              <p className="font-body text-[11px] text-stone-400">HEIC, PNG, JPG cropper with 360° rotation</p>
-            </div>
+        {/* Footer Content */}
+        <div className="relative z-10 max-w-5xl mx-auto px-4 py-5 space-y-2">
+          <div className="flex items-center justify-center gap-2">
+            <span className="font-display font-black text-xl sm:text-2xl text-[#E5F552] uppercase tracking-wider flex items-center justify-center gap-2">
+              MADE WITH <Heart className="w-5 h-5 text-[#FF5E97] fill-current inline-block animate-bounce" /> BY TEAM PORYGON
+            </span>
+          </div>
 
-            <div className="p-3.5 rounded-2xl bg-[#0D2818]/80 border border-[#1B422B] backdrop-blur-md shadow-lg space-y-1">
-              <div className="flex items-center gap-2 text-[#FF5E97]">
-                <Sliders className="w-4 h-4" />
-                <p className="font-terminal font-bold text-xs uppercase tracking-wider">CANVA-LITE DIY STUDIO</p>
-              </div>
-              <p className="font-body text-[11px] text-stone-400">Atkinson B&W Dithering & 5 GameBoy Palettes</p>
-            </div>
+          <p className="font-terminal text-[11px] text-stone-300 uppercase tracking-widest font-bold">
+            HACKER HOUSE GOA 2026 OFFICIAL EVENT SUBMISSION · TASK 1
+          </p>
 
-            <div className="p-3.5 rounded-2xl bg-[#0D2818]/80 border border-[#1B422B] backdrop-blur-md shadow-lg space-y-1">
-              <div className="flex items-center gap-2 text-[#E5F552]">
-                <Download className="w-4 h-4" />
-                <p className="font-terminal font-bold text-xs uppercase tracking-wider">HIGH-DPI PNG & 𝕏</p>
-              </div>
-              <p className="font-body text-[11px] text-stone-400">Instant PNG export & #FrameInGoa</p>
-            </div>
+          <div className="pt-1 flex items-center justify-center gap-4 text-xs font-terminal text-[#E5F552] font-bold">
+            <a href="https://hhgoa.com" target="_blank" rel="noopener noreferrer" className="hover:underline">
+              HHGOA.COM
+            </a>
+            <span>·</span>
+            <a href="https://github.com/shamsundarsk/hhgoa" target="_blank" rel="noopener noreferrer" className="hover:underline">
+              GITHUB REPO
+            </a>
           </div>
         </div>
       </footer>
